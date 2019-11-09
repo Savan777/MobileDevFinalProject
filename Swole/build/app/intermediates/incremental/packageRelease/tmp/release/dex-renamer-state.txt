@@ -1,0 +1,7 @@
+#Tue Nov 05 23:46:58 EST 2019
+base.0=C\:\\Users\\Amal\\Documents\\Code\\Android\\Swole\\swole\\build\\app\\intermediates\\transforms\\dexMerger\\release\\0
+path.1=classes2.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=C\:\\Users\\Amal\\Documents\\Code\\Android\\Swole\\swole\\build\\app\\intermediates\\transforms\\dexMerger\\release\\0
