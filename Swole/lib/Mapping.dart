@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:swole/homepage.dart';
 import 'package:swole/LoginRegisterPage.dart';
-import 'package:swole/Authentication.dart';
+import 'package:swole/auth.dart';
 
 class MappingPage extends StatefulWidget {
   final AuthImplementation auth;
@@ -26,17 +26,20 @@ enum AuthStatus {
 class _MappingPageState extends State<MappingPage> {
   AuthStatus authStatus = AuthStatus.notSignedIn;
 
+  AuthImplementation auth;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.auth.getCurrentUser().then((firebaseUserId) {
-      setState(() {
-        authStatus = firebaseUserId == null
-            ? AuthStatus.notSignedIn
-            : AuthStatus.signedIn;
+    try{
+      auth.getCurrentUser().then((userId){
+          setState(() {
+            authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+          });
       });
-    });
+    }catch (e) {}
+  
   }
 
   @override
@@ -47,7 +50,7 @@ class _MappingPageState extends State<MappingPage> {
         return new LoginRegisterPage(auth: widget.auth, onSignedIn: _signedIn);
 
       case AuthStatus.signedIn:
-        return new HomeApp(auth: widget.auth, onSignedOut: _signOut);
+        return new HomeApp(auth: widget.auth,);
     }
     return null;
   }
@@ -58,9 +61,5 @@ class _MappingPageState extends State<MappingPage> {
     });
   }
 
-  void _signOut() {
-    setState(() {
-      authStatus = AuthStatus.notSignedIn;
-    });
-  }
+ 
 }

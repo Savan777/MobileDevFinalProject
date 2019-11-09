@@ -19,7 +19,7 @@ class ListPage extends StatefulWidget {
  Future getWorkouts() async {
    var firestore = Firestore.instance;
 
-   QuerySnapshot qn = await firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").getDocuments();
+   QuerySnapshot qn = await firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").getDocuments();
 
    return qn.documents;
  }
@@ -28,21 +28,21 @@ class ListPage extends StatefulWidget {
    print("Request to add: " + name);
    var firestore = Firestore.instance;
 
-   firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").document(name).setData({"title": name});
+   firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").document(name).setData({"title": name});
  }
 
  void addFoodEntry(String foodName) async {
    print("Request to add: " + foodName);
    var firestore = Firestore.instance;
 
-   firestore.collection("user_data").document(authService.currUser().uid).collection("food").document(foodName).setData({"date": foodName});
+   firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("food").document(foodName).setData({"date": foodName});
  }
 
 
  Future getFood() async {
    var firestore = Firestore.instance;
 
-   QuerySnapshot qn = await firestore.collection("user_data").document(authService.currUser().uid).collection("food").getDocuments();
+   QuerySnapshot qn = await firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("food").getDocuments();
 
    return qn.documents;
  }

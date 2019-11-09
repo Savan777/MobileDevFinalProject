@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'LoginRegisterPage.dart';
 import 'Mapping.dart';
-import 'Authentication.dart';
+import 'package:swole/auth.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MappingPage(auth: Auth(),),
+      home: MappingPage(auth: AuthService(),),
     );
   }
 }

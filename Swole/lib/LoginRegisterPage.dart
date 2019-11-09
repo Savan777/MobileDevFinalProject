@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'auth.dart';
 import 'package:swole/homepage.dart';
-import 'Authentication.dart';
+import 'package:swole/auth.dart';
+//import 'Authentication.dart';
 
 class LoginRegisterPage extends StatefulWidget {
   LoginRegisterPage({
@@ -60,7 +60,7 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
         context,
         MaterialPageRoute(
             builder: (context) => HomeApp(
-                  auth: Auth(),
+                  auth: AuthService(),
                 )),
         ModalRoute.withName("/Home"));
   }

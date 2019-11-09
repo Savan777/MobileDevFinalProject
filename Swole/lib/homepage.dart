@@ -1,15 +1,13 @@
 import 'listpage.dart';
 import 'package:flutter/material.dart';
-import 'Authentication.dart';
+import 'package:swole/auth.dart';
 
 class HomeApp extends StatelessWidget {
   HomeApp({
     this.auth,
-    this.onSignedOut,
   });
 
   final AuthImplementation auth;
-  final VoidCallback onSignedOut;
 
   @override
   Widget build(BuildContext context) {

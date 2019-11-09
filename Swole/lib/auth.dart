@@ -3,7 +3,15 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 
-class AuthService {
+
+abstract class AuthImplementation {
+  Future<String> SignIn(String email, String password);
+  Future<String> SignUp(String email, String password);
+  Future<String> getCurrentUser();
+}
+
+class AuthService implements AuthImplementation{
+
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _db = Firestore.instance;
@@ -26,6 +34,33 @@ class AuthService {
       }
     });
   }
+
+
+
+//will allow user to sign in
+  Future<String> SignIn(String email, String password) async {
+    FirebaseUser user = (await _auth.signInWithEmailAndPassword(
+            email: email, password: password))
+        .user;
+    user2 = user;
+    return user.uid;
+  }
+
+//will allow user to sign up
+  Future<String> SignUp(String email, String password) async {
+    FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+            email: email, password: password))
+        .user;
+    return user.uid;
+  }
+
+  Future<String> getCurrentUser() async {
+    FirebaseUser user = await _auth.currentUser();
+    
+    return user.uid;
+  }
+
+
 
   Future<FirebaseUser> googleSignIn() async {
     loading.add(true);
