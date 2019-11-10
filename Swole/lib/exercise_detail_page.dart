@@ -23,7 +23,7 @@ class ExerciseDetailPage extends StatefulWidget {
           icon: Icon(Icons.delete),
           onPressed:() {
            var firestore = Firestore.instance;
-           firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").document(widget.exercise.data["workout"]).collection("data").document(widget.exercise.data["title"]).delete();
+           firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").document(widget.exercise.data["workout"]).collection("data").document(widget.exercise.data["title"]).delete();
            /*Navigator.pushAndRemoveUntil(
                     context, 
                     MaterialPageRoute(
@@ -70,14 +70,14 @@ class ExerciseDetailPage extends StatefulWidget {
   getExerciseInfo() async {
     var firestore = Firestore.instance;
 
-    QuerySnapshot qn = await firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").document(widget.exercise.data["workout"]).collection("data").document(widget.exercise.data["title"]).collection("sets").getDocuments();
+    QuerySnapshot qn = await firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").document(widget.exercise.data["workout"]).collection("data").document(widget.exercise.data["title"]).collection("sets").getDocuments();
     return qn.documents;
   }
 
 addRep(weight, reps) async {
   var firestore = Firestore.instance;
   String identifier = DateTime.now().toString();
-  firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").document(widget.exercise.data["workout"]).collection("data").document(widget.exercise.data["title"]).collection("sets").document(identifier).setData({"reps": reps, "weight": weight, "id": identifier});
+  firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").document(widget.exercise.data["workout"]).collection("data").document(widget.exercise.data["title"]).collection("sets").document(identifier).setData({"reps": reps, "weight": weight, "id": identifier});
 }
 
   deleteDialog(id) {
@@ -108,7 +108,7 @@ Navigator.pop(context);
 delete(id){
     var firestore = Firestore.instance;
 
-    firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").document(widget.exercise.data["workout"]).collection("data").document(widget.exercise.data["title"]).collection("sets").document(id).delete();
+    firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").document(widget.exercise.data["workout"]).collection("data").document(widget.exercise.data["title"]).collection("sets").document(id).delete();
 Navigator.pop(context);
 }
 
