@@ -23,7 +23,7 @@ class FoodDetailPage extends StatefulWidget {
           icon: Icon(Icons.delete),
           onPressed:() {
            var firestore = Firestore.instance;
-           firestore.collection("user_data").document(authService.currUser().uid).collection("food").document(widget.food.documentID).delete();
+           firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("food").document(widget.food.documentID).delete();
                   Navigator.pop(context);
           },
           
@@ -70,7 +70,7 @@ class FoodDetailPage extends StatefulWidget {
 
   getFoodEntry() async {
     var firestore = Firestore.instance;
-    QuerySnapshot qn = await firestore.collection("user_data").document(authService.currUser().uid).collection("food").document(widget.food.data["date"]).collection("data").getDocuments();
+    QuerySnapshot qn = await firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("food").document(widget.food.data["date"]).collection("data").getDocuments();
     return qn.documents;
   }
 
@@ -79,7 +79,7 @@ class FoodDetailPage extends StatefulWidget {
   print("Request to add: " + text);
     var firestore = Firestore.instance;
 
-    firestore.collection("user_data").document(authService.currUser().uid).collection("food").document(widget.food.data["date"]).collection("data")..document(text).setData({"name": text, "calories": text2});
+    firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("food").document(widget.food.data["date"]).collection("data")..document(text).setData({"name": text, "calories": text2});
   }
 
   addFoodItemDialog() {
