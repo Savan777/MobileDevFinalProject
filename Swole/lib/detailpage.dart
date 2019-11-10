@@ -25,7 +25,7 @@ class DetailPage extends StatefulWidget {
           icon: Icon(Icons.delete),
           onPressed:() {
            var firestore = Firestore.instance;
-           firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").document(widget.workout.documentID).delete();
+           firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").document(widget.workout.documentID).delete();
            Navigator.pop(context);
           },
         ),
@@ -80,7 +80,7 @@ class DetailPage extends StatefulWidget {
 
   getExercise() async {
     var firestore = Firestore.instance;
-    QuerySnapshot qn = await firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").document(widget.workout.data["title"]).collection("data").getDocuments();
+    QuerySnapshot qn = await firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").document(widget.workout.data["title"]).collection("data").getDocuments();
     return qn.documents;
   }
 
@@ -89,7 +89,7 @@ class DetailPage extends StatefulWidget {
   print("Request to add: " + text);
     var firestore = Firestore.instance;
 
-    firestore.collection("user_data").document(authService.currUser().uid).collection("workouts").document(widget.workout.data["title"]).collection("data").document(text).setData({"title": text, "workout": widget.workout.data["title"]});
+    firestore.collection("user_data").document(authService.getCurrentUser().toString()).collection("workouts").document(widget.workout.data["title"]).collection("data").document(text).setData({"title": text, "workout": widget.workout.data["title"]});
   }
 
   addExerciseDialog() {
