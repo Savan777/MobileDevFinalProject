@@ -85,7 +85,7 @@ class _LoginRegisterState extends State<LoginRegisterPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new Scaffold(
+    return new Scaffold(resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         title:
             new Center(child: new Text("Swole", textAlign: TextAlign.center)),
